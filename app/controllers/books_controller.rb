@@ -23,7 +23,9 @@ class BooksController < ApplicationController
     @thisBook = Book.find(params[:id])
     @book = Book.new
     @user = User.find(@thisBook.user_id)
+    @book_comment = BookComment.new
   end
+  
   def edit
     book = Book.find(params[:id])
     unless book.user_id == current_user.id
@@ -49,5 +51,8 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body, :image, :user_id)
+  end
+  def book_comment_params
+    params.require(:book_comment).permit(:comment)
   end
 end
